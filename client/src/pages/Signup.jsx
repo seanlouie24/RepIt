@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import API from '../services/api';
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -13,7 +13,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/users/signup", formData);
+      const res = await API.post('/users/signup', formData);
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
