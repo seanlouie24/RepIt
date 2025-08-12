@@ -40,7 +40,6 @@ const Dashboard = () => {
       setWorkouts((prev) => {
         const updatedWorkouts = prev.filter((workout) => workout._id !== id);
   
-        // Recalculate total exercises based on updated workouts
         const exerciseCount = updatedWorkouts.reduce(
           (total, workout) => total + (workout.exercises?.length || 0),
           0
