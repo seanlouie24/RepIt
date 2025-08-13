@@ -8,7 +8,8 @@ const app = express();
 
 const corsOptions = {
   origin: [
-    'http://localhost:3000', 
+    'http://localhost:3000',
+    'repitapp.vercel.app',
     'https://rep-it.vercel.app', 
     'https://rep-it-seans-projects-059cf3f4.vercel.app'
   ],
