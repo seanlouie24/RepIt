@@ -55,7 +55,37 @@ const deleteWorkout = async (req,res) => {
     }
 };
 
+const createTemplate = async (req,res) => {
+  try{
+    const{exercises,date} = req.body;
 
-module.exports = {createWorkout, getWorkouts, updateWorkout, deleteWorkout};
+    if(!Array.isArray(exercises) || exercises.length === 0){
+      return res.status(400).json({message: 'At least one exercise is required'});
+    }
+    
+    const template = await workout.create({
+      user: req.user,
+      date: date || new Date(),
+      exercises,
+      isTemplate: true
+    });
+    res.status(201).json(template);
+  }
+  catch{
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const getTemplates = async (req,res) => {
+  try {
+    const templates = await Workout.find({ user: req.user, isTemplate: true }).sort({ date: -1 });
+    res.json(template);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+module.exports = {createWorkout, getWorkouts, updateWorkout, deleteWorkout, createTemplate, getTemplates};
 
         
